@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -13,13 +12,6 @@ class NoteItem extends StatelessWidget {
     return Card(
       elevation: 5,
       margin: const EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: BorderSide(
-          color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-          width: 2,
-        ),
-      ),
       // color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.all(10.0),

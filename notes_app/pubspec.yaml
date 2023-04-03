@@ -41,6 +41,9 @@ dependencies:
   firebase_core: ^2.7.0
   firebase_auth: ^4.2.9
   google_sign_in: ^6.0.2
+  dynamic_color_theme: ^2.0.0
+  responsive_sizer: ^3.1.1
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:

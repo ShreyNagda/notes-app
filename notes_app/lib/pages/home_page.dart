@@ -1,10 +1,12 @@
+import 'package:dynamic_color_theme/dynamic_color_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/pages/add_note_page.dart';
-import 'package:notes_app/pages/settings_page.dart';
+// import 'package:notes_app/pages/profile_page.dart';
 import 'package:notes_app/providers/notes_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
 import '../models/note.dart';
 import '../widgets/note_item.dart';
 
@@ -21,20 +23,54 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     NoteProvider noteProvider = Provider.of<NoteProvider>(context);
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              decoration:
+                  BoxDecoration(color: DynamicColorTheme.of(context).color),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: DynamicColorTheme.of(context).isDark
+                    ? Colors.white
+                    : const Color.fromARGB(
+                        115,
+                        82,
+                        82,
+                        82,
+                      ),
+                child: Icon(
+                  Icons.person,
+                  color: !DynamicColorTheme.of(context).isDark
+                      ? Colors.white
+                      : Colors.black
+                ),
+              ),
+              accountName: Text(auth.currentUser!.displayName!),
+              accountEmail: Text(auth.currentUser!.email!),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        title: const Text('Notes App',),
+        title: const Text(
+          'Notes App',
+        ),
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (BuildContext context) => const SettingsPage(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.more_vert))
+            onPressed: () {
+              DynamicColorTheme.of(context).setIsDark(
+                isDark: !DynamicColorTheme.of(context).isDark,
+                shouldSave: true,
+              );
+              setState(() {});
+            },
+            icon: Icon(
+              DynamicColorTheme.of(context).isDark
+                  ? CupertinoIcons.light_max
+                  : CupertinoIcons.moon,
+            ),
+          ),
         ],
       ),
       body: !noteProvider.isLoading
@@ -52,8 +88,23 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       children: [
                         TextFormField(
-                          decoration: const InputDecoration(
-                              suffixIcon: Icon(Icons.search)),
+                          style: const TextStyle(fontSize: 15),
+                          cursorColor: DynamicColorTheme.of(context).color,
+                          decoration: InputDecoration(
+                            suffixIconColor:
+                                DynamicColorTheme.of(context).color,
+                            // border: UnderlineInputBorder(
+                            //   borderSide: BorderSide(
+                            //     color: DynamicColorTheme.of(context).color,
+                            //   ),
+                            // ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: DynamicColorTheme.of(context).color,
+                                  width: 2),
+                            ),
+                            suffixIcon: const Icon(Icons.search),
+                          ),
                           onChanged: (value) {
                             setState(() {
                               searchQuery = value;
