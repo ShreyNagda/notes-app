@@ -4,7 +4,7 @@ import '../models/note.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static String baseUrl = 'https://notes-app-5fjt.onrender.com/notes';
+  static String baseUrl = 'https://notes-app-15we.onrender.com/notes';
 
   static Future<void> addNote(Note note) async {
     Uri requestedUri = Uri.parse('$baseUrl/add');
