@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const noteSchema = mongoose.Schema({
+const reminderSchema = mongoose.Schema({
   id: {
     type: String,
     unique: true,
@@ -24,4 +24,4 @@ const noteSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Note", noteSchema);
+module.exports = mongoose.model("Reminder", reminderSchema);

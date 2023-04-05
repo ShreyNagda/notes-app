@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Reminder = require("../models/reminder");
 
-router.post("/list/", async function (req, res) {
+router.post("/list", async function (req, res) {
   var notes = await Reminder.find({ userid: req.body.userid });
   res.json(notes);
 });
@@ -16,7 +16,7 @@ router.post("/add", async function (req, res) {
     userid: req.body.userid,
     title: req.body.title,
     content: req.body.content,
-    reminderDate: req.body.reminderDate,
+    reminderDate: Date(req.body.reminderDate),
   });
   await newNote.save();
   const response = {
