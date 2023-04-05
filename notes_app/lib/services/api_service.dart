@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../models/note.dart';
 import 'package:http/http.dart' as http;
 
-class ApiService {
+class NotesApiService {
   static String baseUrl = 'https://notes-app-15we.onrender.com/notes';
 
   static Future<void> addNote(Note note) async {
@@ -36,4 +36,9 @@ class ApiService {
     return notes;
     // return [];
   }
+}
+
+
+class ReminderApiService{
+  static String baseUrl = 'https://notes-app-15we.onrender.com/reminders';
 }

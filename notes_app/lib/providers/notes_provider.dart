@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/services/api_service.dart';
 
 import '../main.dart';
 import '../models/note.dart';
+import '../services/api_service.dart';
 
 class NoteProvider extends ChangeNotifier {
   bool isLoading = true;
@@ -20,7 +20,7 @@ class NoteProvider extends ChangeNotifier {
     notes.add(note);
     sortNotes();
     notifyListeners();
-    ApiService.addNote(note);
+    NotesApiService.addNote(note);
   }
 
   void updateNote(Note note) {
@@ -29,7 +29,7 @@ class NoteProvider extends ChangeNotifier {
     notes[noteIndex] = note;
     sortNotes();
     notifyListeners();
-    ApiService.addNote(note);
+    NotesApiService.addNote(note);
   }
 
   void deleteNote(Note note) {
@@ -39,11 +39,11 @@ class NoteProvider extends ChangeNotifier {
     notes.removeAt(noteIndex);
     sortNotes();
     notifyListeners();
-    ApiService.deleteNote(note);
+    NotesApiService.deleteNote(note);
   }
 
   void fetchNotes() async {
-    notes = await ApiService.fetchNotes(auth.currentUser!.email!);
+    notes = await NotesApiService.fetchNotes(auth.currentUser!.email!);
     isLoading = false;
     notifyListeners();
   }

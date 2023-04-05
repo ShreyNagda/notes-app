@@ -2,7 +2,8 @@ import 'package:dynamic_color_theme/dynamic_color_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/pages/add_note_page.dart';
-// import 'package:notes_app/pages/profile_page.dart';
+import 'package:notes_app/pages/reminder_page.dart';
+import 'package:notes_app/pages/settings_page.dart';
 import 'package:notes_app/providers/notes_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   String searchQuery = '';
   @override
   Widget build(BuildContext context) {
+    // print(DateTime.now().millisecondsSinceEpoch);
     NoteProvider noteProvider = Provider.of<NoteProvider>(context);
     return Scaffold(
       drawer: Drawer(
@@ -38,15 +40,51 @@ class _HomePageState extends State<HomePage> {
                         82,
                         82,
                       ),
-                child: Icon(
-                  Icons.person,
-                  color: !DynamicColorTheme.of(context).isDark
-                      ? Colors.white
-                      : Colors.black
-                ),
+                child: Icon(Icons.person,
+                    color: !DynamicColorTheme.of(context).isDark
+                        ? Colors.white
+                        : Colors.black),
               ),
               accountName: Text(auth.currentUser!.displayName!),
               accountEmail: Text(auth.currentUser!.email!),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              title: Text(
+                'Home',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              trailing: const Icon(Icons.home),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (_) => const ReminderPage()),
+                );
+              },
+              title: Text(
+                'Reminders',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              trailing: const Icon(Icons.alarm),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (_) => const SettingsPage()),
+                );
+              },
+              title: Text(
+                'Settings',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              trailing: const Icon(Icons.settings),
             ),
           ],
         ),
@@ -98,10 +136,17 @@ class _HomePageState extends State<HomePage> {
                             //     color: DynamicColorTheme.of(context).color,
                             //   ),
                             // ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: DynamicColorTheme.of(context).color,
+                                width: 2,
+                              ),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: DynamicColorTheme.of(context).color,
-                                  width: 2),
+                                color: DynamicColorTheme.of(context).color,
+                                width: 2,
+                              ),
                             ),
                             suffixIcon: const Icon(Icons.search),
                           ),
