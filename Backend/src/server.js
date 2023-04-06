@@ -22,9 +22,6 @@ mongoose
 
     const noteRouter = require("./routes/note");
     app.use("/notes", noteRouter);
-
-    const reminderRouter = require("./routes/reminder");
-    app.use("/reminders", reminderRouter);
   });
 
 const PORT = process.env.PORT || 5000;
