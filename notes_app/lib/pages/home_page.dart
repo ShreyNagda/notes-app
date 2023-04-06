@@ -2,7 +2,6 @@ import 'package:dynamic_color_theme/dynamic_color_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/pages/add_note_page.dart';
-import 'package:notes_app/pages/reminder_page.dart';
 import 'package:notes_app/pages/settings_page.dart';
 import 'package:notes_app/providers/notes_provider.dart';
 import 'package:provider/provider.dart';
@@ -57,20 +56,6 @@ class _HomePageState extends State<HomePage> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: const Icon(Icons.home),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (_) => const ReminderPage()),
-                );
-              },
-              title: Text(
-                'Reminders',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              trailing: const Icon(Icons.alarm),
             ),
             ListTile(
               onTap: () {

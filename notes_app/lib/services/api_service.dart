@@ -37,8 +37,3 @@ class NotesApiService {
     // return [];
   }
 }
-
-
-class ReminderApiService{
-  static String baseUrl = 'https://notes-app-15we.onrender.com/reminders';
-}
