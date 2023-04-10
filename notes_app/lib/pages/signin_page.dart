@@ -58,15 +58,11 @@ class _SigninPageState extends State<SigninPage> {
                           showDialog(
                               context: context,
                               builder: (_) {
-                                return Dialog(
-                                  child: Container(
-                                    width: 200,
-                                    height: 200,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: const Center(
-                                        child: CircularProgressIndicator()),
+                                return const Dialog(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
                                   ),
                                 );
                               });
@@ -114,14 +110,15 @@ class _SigninPageState extends State<SigninPage> {
           );
         }
       }
-    } on FirebaseAuthException catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Error signing in! code: ${error.code}',
-          ),
-        ),
-      );
+    } on FirebaseAuthException {
+      
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //       'Error signing in! code: ${error.code}',
+      //     ),
+      //   ),
+      // );
     }
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

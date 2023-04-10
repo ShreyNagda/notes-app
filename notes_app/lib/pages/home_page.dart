@@ -2,7 +2,9 @@ import 'package:dynamic_color_theme/dynamic_color_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/pages/add_note_page.dart';
+// import 'package:notes_app/pages/new_note.dart';
 import 'package:notes_app/pages/settings_page.dart';
+import 'package:notes_app/pages/signin_page.dart';
 import 'package:notes_app/providers/notes_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -70,6 +72,41 @@ class _HomePageState extends State<HomePage> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: const Icon(Icons.settings),
+            ),
+            ListTile(
+              onTap: () async {
+                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: const Text('Do you want to logout?', style: TextStyle(fontSize: 18, letterSpacing: 1),),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel')),
+                          ElevatedButton(
+                              onPressed: () async {
+                                await auth.signOut();
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const SigninPage()),
+                                    (route) => false);
+                              },
+                              child: const Text("Logout"))
+                        ],
+                      );
+                    });
+              },
+              title: Text(
+                'Logout',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              trailing: const Icon(Icons.logout),
             ),
           ],
         ),
@@ -196,11 +233,8 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             CupertinoPageRoute(
-              fullscreenDialog: true,
-              builder: (context) => const AddNotePage(
-                isUpdate: false,
-              ),
-            ),
+                fullscreenDialog: true,
+                builder: (context) => const AddNotePage(isUpdate: false)),
           );
         },
         child: const Icon(Icons.add),
